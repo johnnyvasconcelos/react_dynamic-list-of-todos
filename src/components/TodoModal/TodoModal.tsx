@@ -1,12 +1,16 @@
 import React from 'react';
 import { Loader } from '../Loader';
 
-export const TodoModal: React.FC = () => {
+interface Props {
+  loading: boolean;
+}
+
+export const TodoModal: React.FC<Props> = ({ loading }) => {
   return (
     <div className="modal is-active" data-cy="modal">
       <div className="modal-background" />
 
-      {true ? (
+      {!loading ? (
         <Loader />
       ) : (
         <div className="modal-card">
