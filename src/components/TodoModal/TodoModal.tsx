@@ -1,11 +1,13 @@
 import React from 'react';
 import { Loader } from '../Loader';
+import { User } from '../../types/User';
 
 interface Props {
   loading: boolean;
+  user: User | null;
 }
 
-export const TodoModal: React.FC<Props> = ({ loading }) => {
+export const TodoModal: React.FC<Props> = ({ loading, user }) => {
   return (
     <div className="modal is-active" data-cy="modal">
       <div className="modal-background" />
@@ -37,7 +39,7 @@ export const TodoModal: React.FC<Props> = ({ loading }) => {
 
               {' by '}
 
-              <a href="mailto:Sincere@april.biz">Leanne Graham</a>
+              <a href={`mailto:${user?.email}`}>{user?.name}</a>
             </p>
           </div>
         </div>

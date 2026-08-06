@@ -8,11 +8,14 @@ import { TodoList } from './components/TodoList';
 import { TodoFilter } from './components/TodoFilter';
 import { TodoModal } from './components/TodoModal';
 import { Loader } from './components/Loader';
-import { getTodos } from './api';
+import { getTodos, getUser } from './api';
 import { Todo } from './types/Todo';
+import { User } from './types/User';
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [user, setUser] = useState<User | null>(null);
+  const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,6 +30,21 @@ export const App: React.FC = () => {
       });
   }, []);
 
+  useEffect(() => {
+    if (!selectedTodo) {
+      setUser(null);
+
+      return;
+    }
+
+    getUser(selectedTodo.id)
+      .then(dataUser => setUser(dataUser))
+      .catch(error => {
+        // eslint-disable-next-line no-console
+        console.error(error);
+      });
+  }, [selectedTodo]);
+
   return (
     <>
       <div className="section">
@@ -39,12 +57,16 @@ export const App: React.FC = () => {
             </div>
 
             <div className="block">
-              {loading ? <Loader /> : <TodoList todos={todos} />}
+              {loading ? (
+                <Loader />
+              ) : (
+                <TodoList onSelectTodo={setSelectedTodo} todos={todos} />
+              )}
             </div>
           </div>
         </div>
       </div>
-      <TodoModal loading={loading} />
+      <TodoModal user={user} loading={loading} />
     </>
   );
 };
