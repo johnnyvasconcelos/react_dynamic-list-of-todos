@@ -17,6 +17,7 @@ export const App: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userLoading, setUserLoading] = useState(false);
 
   useEffect(() => {
     getTodos()
@@ -42,6 +43,9 @@ export const App: React.FC = () => {
       .catch(error => {
         // eslint-disable-next-line no-console
         console.error(error);
+      })
+      .finally(() => {
+        setUserLoading(false);
       });
   }, [selectedTodo]);
 
@@ -74,7 +78,7 @@ export const App: React.FC = () => {
         onClose={handleCloseModal}
         user={user}
         todo={selectedTodo}
-        loading={loading}
+        loading={userLoading}
       />
     </>
   );
