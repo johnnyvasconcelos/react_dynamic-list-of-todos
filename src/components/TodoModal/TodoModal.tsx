@@ -33,7 +33,12 @@ export const TodoModal: React.FC<Props> = ({
             </div>
 
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <button type="button" className="delete" data-cy="modal-close" />
+            <button
+              type="button"
+              className="delete"
+              onClick={onClose}
+              data-cy="modal-close"
+            />
           </header>
 
           <div className="modal-card-body">

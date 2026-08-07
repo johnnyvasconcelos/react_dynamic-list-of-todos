@@ -60,7 +60,23 @@ export const App: React.FC = () => {
   const [selectValue, setSelectValue] = useState('All');
 
   const filtredTodos = todos.filter(t => {
-    return t.title.toLowerCase().includes(inputValue.toLowerCase().trim());
+    if (selectValue === 'all') {
+      return t.title.toLowerCase().includes(inputValue.toLowerCase().trim());
+    }
+
+    if (selectValue === 'active') {
+      return (
+        t.title.toLowerCase().includes(inputValue.toLowerCase().trim()) &&
+        !t.completed
+      );
+    }
+
+    if (selectValue === 'completed') {
+      return (
+        t.title.toLowerCase().includes(inputValue.toLowerCase().trim()) &&
+        t.completed
+      );
+    }
   });
 
   return (
