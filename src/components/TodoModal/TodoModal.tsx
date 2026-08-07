@@ -1,18 +1,26 @@
 import React from 'react';
 import { Loader } from '../Loader';
 import { User } from '../../types/User';
+import { Todo } from '../../types/Todo';
 
 interface Props {
   loading: boolean;
   user: User | null;
+  todo: Todo | null;
+  onClose: () => void;
 }
 
-export const TodoModal: React.FC<Props> = ({ loading, user }) => {
+export const TodoModal: React.FC<Props> = ({
+  loading,
+  user,
+  todo,
+  onClose,
+}) => {
   return (
-    <div className="modal is-active" data-cy="modal">
-      <div className="modal-background" />
+    <div className={`modal ${todo ? 'is-active' : ''}`} data-cy="modal">
+      <div className="modal-background" onClick={onClose} />
 
-      {!loading ? (
+      {loading ? (
         <Loader />
       ) : (
         <div className="modal-card">

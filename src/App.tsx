@@ -37,13 +37,17 @@ export const App: React.FC = () => {
       return;
     }
 
-    getUser(selectedTodo.id)
+    getUser(selectedTodo.userId)
       .then(dataUser => setUser(dataUser))
       .catch(error => {
         // eslint-disable-next-line no-console
         console.error(error);
       });
   }, [selectedTodo]);
+
+  const handleCloseModal = () => {
+    setSelectedTodo(null);
+  };
 
   return (
     <>
@@ -66,7 +70,12 @@ export const App: React.FC = () => {
           </div>
         </div>
       </div>
-      <TodoModal user={user} loading={loading} />
+      <TodoModal
+        onClose={handleCloseModal}
+        user={user}
+        todo={selectedTodo}
+        loading={loading}
+      />
     </>
   );
 };
