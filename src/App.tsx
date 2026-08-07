@@ -38,6 +38,9 @@ export const App: React.FC = () => {
       return;
     }
 
+    setUser(null);
+    setUserLoading(true);
+
     getUser(selectedTodo.userId)
       .then(dataUser => setUser(dataUser))
       .catch(error => {
@@ -53,6 +56,13 @@ export const App: React.FC = () => {
     setSelectedTodo(null);
   };
 
+  const [inputValue, setInputValue] = useState('');
+  const [selectValue, setSelectValue] = useState('All');
+
+  const filtredTodos = todos.filter(t => {
+    return t.title.toLowerCase().includes(inputValue.toLowerCase().trim());
+  });
+
   return (
     <>
       <div className="section">
@@ -61,14 +71,19 @@ export const App: React.FC = () => {
             <h1 className="title">Todos:</h1>
 
             <div className="block">
-              <TodoFilter />
+              <TodoFilter
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                selectValue={selectValue}
+                setSelectValue={setSelectValue}
+              />
             </div>
 
             <div className="block">
               {loading ? (
                 <Loader />
               ) : (
-                <TodoList onSelectTodo={setSelectedTodo} todos={todos} />
+                <TodoList onSelectTodo={setSelectedTodo} todos={filtredTodos} />
               )}
             </div>
           </div>
