@@ -57,7 +57,7 @@ export const App: React.FC = () => {
   };
 
   const [inputValue, setInputValue] = useState('');
-  const [selectValue, setSelectValue] = useState('All');
+  const [selectValue, setSelectValue] = useState('all');
 
   const filtredTodos = todos.filter(t => {
     if (selectValue === 'all') {
