@@ -3,6 +3,8 @@ import { Loader } from '../Loader';
 import { User } from '../../types/User';
 import { Todo } from '../../types/Todo';
 
+import classNames from 'classnames';
+
 interface Props {
   loading: boolean;
   user: User | null;
@@ -17,7 +19,12 @@ export const TodoModal: React.FC<Props> = ({
   onClose,
 }) => {
   return (
-    <div className={`modal ${todo ? 'is-active' : ''}`} data-cy="modal">
+    <div
+      className={classNames('modal', {
+        'is-active': todo,
+      })}
+      data-cy="modal"
+    >
       <div className="modal-background" onClick={onClose} />
 
       {loading ? (

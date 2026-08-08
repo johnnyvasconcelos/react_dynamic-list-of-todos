@@ -23,20 +23,20 @@ export const TodoList: React.FC<Props> = ({ todos, onSelectTodo }) => {
       </thead>
 
       <tbody>
-        {todos.map(t => {
+        {todos.map(todo => {
           return (
-            <tr key={t.id} data-cy="todo" className="">
-              <td className="is-vcentered">{t.id}</td>
+            <tr key={todo.id} data-cy="todo" className="">
+              <td className="is-vcentered">{todo.id}</td>
               <td className="is-vcentered" />
               <td className="is-vcentered is-expanded">
-                <p className="has-text-danger">{t.title}</p>
+                <p className="has-text-danger">{todo.title}</p>
               </td>
               <td className="has-text-right is-vcentered">
                 <button
                   data-cy="selectButton"
                   className="button"
                   type="button"
-                  onClick={() => onSelectTodo(t)}
+                  onClick={() => onSelectTodo(todo)}
                 >
                   <span className="icon">
                     <i className="far fa-eye" />
