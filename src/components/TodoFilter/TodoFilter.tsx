@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 interface Props {
   inputValue: string;
   onInputChange: (value: string) => void;
@@ -44,10 +46,10 @@ export const TodoFilter: React.FC<Props> = ({
           <i className="fas fa-magnifying-glass" />
         </span>
 
-        <span className="icon is-right" style={{ pointerEvents: 'all' }}>
+        <span className={classNames('icon', 'is-right')}>
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           {inputValue.length > 0 && (
-            <span className="icon is-right" style={{ pointerEvents: 'all' }}>
+            <span className={classNames('icon is-right')}>
               <button
                 data-cy="clearSearchButton"
                 type="button"
