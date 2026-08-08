@@ -41,7 +41,6 @@ export const App: React.FC = () => {
       return;
     }
 
-    setUser(null);
     setUserLoading(true);
 
     getUser(selectedTodo.userId)
