@@ -46,19 +46,16 @@ export const TodoFilter: React.FC<Props> = ({
           <i className="fas fa-magnifying-glass" />
         </span>
 
-        <span className={classNames('icon', 'is-right')}>
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          {inputValue.length > 0 && (
-            <span className={classNames('icon is-right')}>
-              <button
-                data-cy="clearSearchButton"
-                type="button"
-                className="delete"
-                onClick={() => onInputChange('')}
-              />
-            </span>
-          )}
-        </span>
+        {inputValue.length > 0 && (
+          <span className={classNames('icon', 'is-right')}>
+            <button
+              data-cy="clearSearchButton"
+              type="button"
+              className="delete"
+              onClick={() => onInputChange('')}
+            />
+          </span>
+        )}
       </p>
     </form>
   );
