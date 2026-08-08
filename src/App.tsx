@@ -59,7 +59,7 @@ export const App: React.FC = () => {
   const [inputValue, onInputChange] = useState('');
   const [selectValue, onStatusChange] = useState('all');
 
-  const filtredTodos = todos.filter(t => {
+  const filteredTodos = todos.filter(t => {
     const inputName = inputValue.toLowerCase().trim();
 
     if (selectValue === 'all') {
@@ -73,6 +73,8 @@ export const App: React.FC = () => {
     if (selectValue === 'completed') {
       return t.title.toLowerCase().includes(inputName) && t.completed;
     }
+
+    return false;
   });
 
   return (
@@ -98,19 +100,21 @@ export const App: React.FC = () => {
                 <TodoList
                   selectedTodo={selectedTodo}
                   onSelectTodo={setSelectedTodo}
-                  todos={filtredTodos}
+                  todos={filteredTodos}
                 />
               )}
             </div>
           </div>
         </div>
       </div>
-      <TodoModal
-        onClose={handleCloseModal}
-        user={user}
-        todo={selectedTodo}
-        loading={userLoading}
-      />
+      {selectedTodo && (
+        <TodoModal
+          onClose={handleCloseModal}
+          user={user}
+          todo={selectedTodo}
+          loading={userLoading}
+        />
+      )}
     </>
   );
 };

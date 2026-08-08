@@ -49,10 +49,10 @@ export const TodoList: React.FC<Props> = ({
                     data-cy="selectButton"
                     className="button"
                     type="button"
-                    onClick={() => onSelectTodo(todo)}
+                    onClick={() => onSelectTodo(null)}
                   >
                     <span className="icon">
-                      <i className="far fa-eye" />
+                      <i className="far fa-eye-slash" />
                     </span>
                   </button>
                 ) : (
@@ -60,10 +60,10 @@ export const TodoList: React.FC<Props> = ({
                     data-cy="selectButton"
                     className="button"
                     type="button"
-                    onClick={() => onSelectTodo(null)}
+                    onClick={() => onSelectTodo(todo)}
                   >
                     <span className="icon">
-                      <i className="far fa-eye-slash" />
+                      <i className="far fa-eye" />
                     </span>
                   </button>
                 )}
