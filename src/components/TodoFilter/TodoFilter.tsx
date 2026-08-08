@@ -1,15 +1,15 @@
 interface Props {
   inputValue: string;
-  setInputValue: (value: string) => void;
+  onInputChange: (value: string) => void;
   selectValue: string;
-  setSelectValue: (value: string) => void;
+  onStatusChange: (value: string) => void;
 }
 
 export const TodoFilter: React.FC<Props> = ({
   inputValue,
-  setInputValue,
+  onInputChange,
   selectValue,
-  setSelectValue,
+  onStatusChange,
 }) => {
   return (
     <form className="field has-addons">
@@ -18,7 +18,7 @@ export const TodoFilter: React.FC<Props> = ({
           <select
             data-cy="statusSelect"
             onChange={event => {
-              setSelectValue(event.target.value);
+              onStatusChange(event.target.value);
             }}
             value={selectValue}
           >
@@ -36,7 +36,7 @@ export const TodoFilter: React.FC<Props> = ({
           className="input"
           placeholder="Search..."
           onChange={event => {
-            setInputValue(event.target.value);
+            onInputChange(event.target.value);
           }}
           value={inputValue}
         />
@@ -52,7 +52,7 @@ export const TodoFilter: React.FC<Props> = ({
                 data-cy="clearSearchButton"
                 type="button"
                 className="delete"
-                onClick={() => setInputValue('')}
+                onClick={() => onInputChange('')}
               />
             </span>
           )}

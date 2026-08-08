@@ -56,8 +56,8 @@ export const App: React.FC = () => {
     setSelectedTodo(null);
   };
 
-  const [inputValue, setInputValue] = useState('');
-  const [selectValue, setSelectValue] = useState('all');
+  const [inputValue, onInputChange] = useState('');
+  const [selectValue, onStatusChange] = useState('all');
 
   const filtredTodos = todos.filter(t => {
     const inputName = inputValue.toLowerCase().trim();
@@ -85,9 +85,9 @@ export const App: React.FC = () => {
             <div className="block">
               <TodoFilter
                 inputValue={inputValue}
-                setInputValue={setInputValue}
+                onInputChange={onInputChange}
                 selectValue={selectValue}
-                setSelectValue={setSelectValue}
+                onStatusChange={onStatusChange}
               />
             </div>
 
@@ -95,7 +95,11 @@ export const App: React.FC = () => {
               {loading ? (
                 <Loader />
               ) : (
-                <TodoList onSelectTodo={setSelectedTodo} todos={filtredTodos} />
+                <TodoList
+                  selectedTodo={selectedTodo}
+                  onSelectTodo={setSelectedTodo}
+                  todos={filtredTodos}
+                />
               )}
             </div>
           </div>
