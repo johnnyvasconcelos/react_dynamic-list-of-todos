@@ -19,8 +19,8 @@ export const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [userLoading, setUserLoading] = useState(false);
 
-  const [inputValue, onInputChange] = useState('');
-  const [selectValue, onStatusChange] = useState('all');
+  const [inputValue, setInputValue] = useState('');
+  const [selectValue, setSelectValue] = useState('all');
 
   useEffect(() => {
     getTodos()
@@ -88,9 +88,9 @@ export const App: React.FC = () => {
             <div className="block">
               <TodoFilter
                 inputValue={inputValue}
-                onInputChange={onInputChange}
+                onInputChange={setInputValue}
                 selectValue={selectValue}
-                onStatusChange={onStatusChange}
+                onStatusChange={setSelectValue}
               />
             </div>
 
