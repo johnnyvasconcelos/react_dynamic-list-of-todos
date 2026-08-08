@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
@@ -18,6 +18,9 @@ export const App: React.FC = () => {
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   const [loading, setLoading] = useState(true);
   const [userLoading, setUserLoading] = useState(false);
+
+  const [inputValue, onInputChange] = useState('');
+  const [selectValue, onStatusChange] = useState('all');
 
   useEffect(() => {
     getTodos()
@@ -56,26 +59,25 @@ export const App: React.FC = () => {
     setSelectedTodo(null);
   };
 
-  const [inputValue, onInputChange] = useState('');
-  const [selectValue, onStatusChange] = useState('all');
+  const filteredTodos = useMemo(() => {
+    return todos.filter(t => {
+      const inputName = inputValue.toLowerCase().trim();
 
-  const filteredTodos = todos.filter(t => {
-    const inputName = inputValue.toLowerCase().trim();
+      if (selectValue === 'all') {
+        return t.title.toLowerCase().includes(inputName);
+      }
 
-    if (selectValue === 'all') {
-      return t.title.toLowerCase().includes(inputName);
-    }
+      if (selectValue === 'active') {
+        return t.title.toLowerCase().includes(inputName) && !t.completed;
+      }
 
-    if (selectValue === 'active') {
-      return t.title.toLowerCase().includes(inputName) && !t.completed;
-    }
+      if (selectValue === 'completed') {
+        return t.title.toLowerCase().includes(inputName) && t.completed;
+      }
 
-    if (selectValue === 'completed') {
-      return t.title.toLowerCase().includes(inputName) && t.completed;
-    }
-
-    return false;
-  });
+      return false;
+    });
+  }, [todos, inputValue, selectValue]);
 
   return (
     <>
